@@ -1,6 +1,8 @@
 package models
 
 import com.mongodb.casbah.Imports._
+import java.lang.Object
+import org.bson.types.ObjectId
 
 object Contact{
 
@@ -21,9 +23,12 @@ object Contact{
 		mongoColl += newObj
 	}
 
-	def get(id: Option[ObjectId]):String = {
-		val res = mongoColl.findOneByID(id.asInstanceOf[ObjectId])
-		return res.toString()
+	def get(id: String):String = {
+		val objId = new ObjectId(id)
+		val contact = mongoColl.findOneByID(objId)
+		val res = for { x <- contact } yield x
+  		val ret:String = res.mkString(",")
+    	return ret
 	}
 
 	def transform():String = {
@@ -33,6 +38,6 @@ object Contact{
     	return output
 	}
 
-	def delete(id: Long) {}
+	def delete(id: String) {}
 	
 }

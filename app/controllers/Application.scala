@@ -2,6 +2,7 @@ package controllers
 
 import play.api._
 import play.api.mvc._
+import com.mongodb.casbah.Imports._
 
 import models.Contact
 
@@ -33,5 +34,5 @@ object Application extends Controller {
   	Ok(name+", "+address+", "+phone+", "+email)
   }
 
-  def deleteContact(id: String) = TODO
+  def deleteContact(id: Option[ObjectId]) = TODO
 }

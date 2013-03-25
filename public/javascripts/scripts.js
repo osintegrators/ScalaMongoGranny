@@ -54,11 +54,11 @@ var retrieveContactList = function(){
 	var url = "/contacts";
 	$.get(url, function(data, textStatus, jqXHR){
 			data = $.parseJSON(data);
-			console.log(data);
+			// console.log(data);
 			var out = "<option value='-1' selected></option>";
 			for(var i=0;i<data.length;i++){
 				console.log(data[i])
-				out += "<option value='"+data[i]['_id']['$oid']+"' selected>"+data[i].name+"</option>";
+				out += "<option value='"+data[i]['_id']['$oid']+"' >"+data[i].name+"</option>";
 			}
 			$("#frmContacts").html(out);
 			retriveContact();
@@ -76,6 +76,7 @@ var retriveContact = function(){
 	}else{
 		var url = "/contacts/"+strId;
 		$.get(url, function(data){
+			data = $.parseJSON(data);
 			console.log(data);
 			$("#frmName").val(data['name']);
 			$("#frmAddress").val(data['address']);
