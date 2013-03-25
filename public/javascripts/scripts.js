@@ -2,7 +2,7 @@ jQuery.ajaxSetup({cache:false});
 $("document").ready(function(){
 	retrieveContactList();
 	$("#frmContacts").change(function(){
-		// retriveContact();
+		retriveContact();
 	});
 });
 var saveContact = function(){
@@ -17,10 +17,9 @@ var saveContact = function(){
 	var strPhone = $("#frmPhone").val();
 	var strEmail = $("#frmEmail").val();
 	if(strId == "-1"){//new
-		var url = "/contacts/";
-		$.post(url, 
-			{ 'utf8':"✓", 'authenticity_token': "lJxO7oZQ460Rw3+4bk/aO9kpKhdO3+bUFmt+cByPsC8=", 
-			'contact[name]': strName, 'contact[address]': strAddress,
+		var url = "/contacts";
+		$.post(url, 			
+			{ 'contact[name]': strName, 'contact[address]': strAddress,
 			'contact[phone]': strPhone, 'contact[email]': strEmail },
 			function(data){
 				retrieveContactList();
@@ -28,8 +27,7 @@ var saveContact = function(){
 	}else{//update
 		var url = "/contacts/"+strId;
 		$.post(url, 
-			{ 'utf8':"✓", '_method':'put', 'authenticity_token': "lJxO7oZQ460Rw3+4bk/aO9kpKhdO3+bUFmt+cByPsC8=", 
-			'contact[name]': strName, 'contact[address]': strAddress,
+			{ 'contact[name]': strName, 'contact[address]': strAddress,
 			'contact[phone]': strPhone, 'contact[email]': strEmail },
 			function(data){
 				retrieveContactList();
@@ -55,10 +53,12 @@ var deleteContact = function(){
 var retrieveContactList = function(){
 	var url = "/contacts";
 	$.get(url, function(data, textStatus, jqXHR){
-			//console.log(data);
+			data = $.parseJSON(data);
+			console.log(data);
 			var out = "<option value='-1' selected></option>";
 			for(var i=0;i<data.length;i++){
-				out += "<option value='"+data[i].id+"' selected>"+data[i].name+"</option>";
+				console.log(data[i])
+				out += "<option value='"+data[i]['_id']['$oid']+"' selected>"+data[i].name+"</option>";
 			}
 			$("#frmContacts").html(out);
 			retriveContact();
@@ -74,9 +74,9 @@ var retriveContact = function(){
 		$("#frmPhone").val("");
 		$("#frmEmail").val("");
 	}else{
-		var url = "/contacts/"+strId+".json";
+		var url = "/contacts/"+strId;
 		$.get(url, function(data){
-			//console.log(data);
+			console.log(data);
 			$("#frmName").val(data['name']);
 			$("#frmAddress").val(data['address']);
 			$("#frmPhone").val(data['phone']);

@@ -11,4 +11,5 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 # Tasks
 GET		/contacts					controllers.Application.contacts
 POST	/contacts					controllers.Application.newContact
-POST	/contacts/:id/delete		controllers.Application.deleteContact(id: Long)
+GET		/contacts/:id				controllers.Application.retrieveContact(id: String)
+POST	/contacts/:id/delete		controllers.Application.deleteContact(id: String)

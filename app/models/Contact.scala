@@ -1,13 +1,38 @@
 package models
 
-case class Contact(id: Long, name: String)
+import com.mongodb.casbah.Imports._
 
 object Contact{
 
-	def all(): List[Contact] = Nil
+	def mongoColl = MongoClient()("mongo_granny")("contacts")
 
-	def create(name: String) {}
+	def all() : String = {
+		mongoColl.find()
+		return transform()
+	}
 
-	def delete(name: String) {}
+	def create(name: String, address: String, email: String, phone: String) {
+		val builder = MongoDBObject.newBuilder
+		builder += "name" -> name
+		builder += "address" -> address
+		builder += "email" -> email
+		builder += "phone" -> phone
+		val newObj = builder.result
+		mongoColl += newObj
+	}
+
+	def get(id: Option[ObjectId]):String = {
+		val res = mongoColl.findOneByID(id.asInstanceOf[ObjectId])
+		return res.toString()
+	}
+
+	def transform():String = {
+		val res = for { x <- mongoColl } yield x
+  		val objects:String = res.mkString(",")
+    	val output:String = "["+objects+"]"
+    	return output
+	}
+
+	def delete(id: Long) {}
 	
 }
