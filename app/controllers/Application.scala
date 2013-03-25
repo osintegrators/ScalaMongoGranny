@@ -30,11 +30,21 @@ object Application extends Controller {
   	val address = body.asFormUrlEncoded.get("contact[address]")(0)
   	val phone = body.asFormUrlEncoded.get("contact[phone]")(0)
   	Contact.create(name, address, email, phone)
-  	Ok(name+", "+address+", "+phone+", "+email)
+  	Ok("")
   }
 
   def deleteContact(id: String) = Action {
     Contact.delete(id)
+    Ok("")
+  }
+  
+  def updateContact(id: String) = Action {request =>
+  	val body = request.body
+  	val name = body.asFormUrlEncoded.get("contact[name]")(0)
+  	val email = body.asFormUrlEncoded.get("contact[email]")(0)
+  	val address = body.asFormUrlEncoded.get("contact[address]")(0)
+  	val phone = body.asFormUrlEncoded.get("contact[phone]")(0)
+  	Contact.update(id, name, address, email, phone)
     Ok("")
   }
 }

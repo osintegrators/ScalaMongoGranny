@@ -56,7 +56,7 @@ var retrieveContactList = function(){
 			// console.log(data);
 			var out = "<option value='-1' selected></option>";
 			for(var i=0;i<data.length;i++){
-				console.log(data[i])
+				// console.log(data[i])
 				out += "<option value='"+data[i]['_id']['$oid']+"' >"+data[i].name+"</option>";
 			}
 			$("#frmContacts").html(out);
@@ -76,7 +76,7 @@ var retriveContact = function(){
 		var url = "/contacts/"+strId;
 		$.get(url, function(data){
 			data = $.parseJSON(data);
-			console.log(data);
+			// console.log(data);
 			$("#frmName").val(data['name']);
 			$("#frmAddress").val(data['address']);
 			$("#frmPhone").val(data['phone']);

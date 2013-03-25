@@ -44,4 +44,16 @@ object Contact{
 	  mongoColl.remove(newObj)
 	}
 	
+	def update(id: String, name: String, address: String, email: String, phone: String) = {
+	  val objId = new ObjectId(id)
+	  val where = MongoDBObject("_id"->objId)
+	  val builder = MongoDBObject.newBuilder
+	  builder += "name" -> name
+	  builder += "address" -> address
+	  builder += "email" -> email
+	  builder += "phone" -> phone
+	  val newObj = builder.result
+	  mongoColl.update(where,newObj)
+	}
+	
 }
