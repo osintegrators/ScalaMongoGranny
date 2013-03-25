@@ -42,9 +42,8 @@ var deleteContact = function(){
 		notice("This is not an entry and cannot be deleted");
 		return;
 	}
-	var url = "/contacts/"+strId;
+	var url = "/contacts/"+strId+"/delete";
 		$.post(url, 
-			{ '_method':'delete', 'authenticity_token': "lJxO7oZQ460Rw3+4bk/aO9kpKhdO3+bUFmt+cByPsC8=", },
 			function(data){
 				retrieveContactList();
 		});

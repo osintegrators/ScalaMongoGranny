@@ -9,7 +9,6 @@ import models.Contact
 object Application extends Controller {
   
   def index = Action {
-  	// Logger.info("db "+Contact.mongoColl.toString)
   	
     Ok(views.html.index())
   }
@@ -34,5 +33,8 @@ object Application extends Controller {
   	Ok(name+", "+address+", "+phone+", "+email)
   }
 
-  def deleteContact(id: Option[ObjectId]) = TODO
+  def deleteContact(id: String) = Action {
+    Contact.delete(id)
+    Ok("")
+  }
 }

@@ -38,6 +38,10 @@ object Contact{
     	return output
 	}
 
-	def delete(id: String) {}
+	def delete(id: String) = {
+	  val objId = new ObjectId(id)
+	  val newObj = MongoDBObject("_id"->objId)
+	  mongoColl.remove(newObj)
+	}
 	
 }
