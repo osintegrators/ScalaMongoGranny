@@ -9,8 +9,11 @@ Localhost Installation Instructions:
 	Go to http://www.playframework.com/download and download 2.1.0 or later
 	Unzip to a convenient location
 
-3. 'cd' to app directory
+3. Install Mongo
+	>sudo apt-get install mongodb
 
-4. >/play_directory/play run
+4. 'cd' to app directory
 
-5. Enter "localhost:9000" in a browser address bar
+5. >/play_directory/play run
+
+6. Enter "localhost:9000" in a browser address bar
