@@ -1,4 +1,14 @@
-This is your new Play 2.1 application
-=====================================
+Localhost Installation Instructions:
 
-This file will be packaged with your application, when using `play dist`.
+1. Install Scala
+<code>sudo apt-get install scala</code>
+
+2. Install Play
+Go to http://www.playframework.com/download and download 2.1.0 or later
+Unzip to a convenient location
+
+3. 'cd' to app directory
+
+4. <code>/play_directory/play run</code>
+
+5. Enter "localhost:9000" in a browser address bar
